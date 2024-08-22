@@ -14,7 +14,7 @@ module "controlplane" {
   memory  = 8
   storage = 32
   # SSH, Kubernetes, NFS
-  ports = [22, 8080, 30080, 16443, 25000]
+  ports = [22, 8080, 30080, 31883, 16443, 25000]
 
   # MAAS Server Access Info
   url = var.url
