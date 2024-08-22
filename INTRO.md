@@ -13,7 +13,7 @@ Services
 
 SSH Access
 
-    ssh ubuntu@${fqdn}
+    ssh -i ssh/lerncloud ubuntu@${fqdn}
     
 Kubernetes Cluster
 ------------------    
