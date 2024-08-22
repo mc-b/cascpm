@@ -20,11 +20,21 @@ Kubernetes Cluster
     
 Es werden einzelne VMs erstellt. Diese können wie folgt zu einen Kubernetes Cluster zusammengefügt werden.
 
+Git/Bash:
+
     JOIN=$(ssh -i ssh/lerncloud ubuntu@${fqdn} -- microk8s add-node --token-ttl 3600 | grep worker | tail -1)
     
     # Join Worker(s)
     ssh -i ssh/lerncloud ubuntu@${worker_01_fqdn} -- $JOIN
     ssh -i ssh/lerncloud ubuntu@${worker_02_fqdn} -- $JOIN
+    
+PowerShell:
 
+    icacls "ssh/lerncloud" /inheritance:r /grant:r "$($env:USERNAME):(F)"
+    $JOIN=ssh -i ssh/lerncloud ubuntu@${fqdn} -- "microk8s add-node --token-ttl 3600 | grep worker | tail -1"
+    Write-Output $JOIN
+    
+    ssh -i ssh/lerncloud ubuntu@${worker_01_fqdn} -- $JOIN
+    ssh -i ssh/lerncloud ubuntu@${worker_02_fqdn} -- $JOIN
 
 **ACHTUNG**: erst ausführen, wenn das Dashboard erreichbar ist.
