@@ -2,15 +2,9 @@
 #   Kubernetes Umgebung
 #
 
-module "master" {
+module "controlplane" {
 
-  #source     = "./terraform-lerncloud-module"
-  #source     = "git::https://github.com/mc-b/terraform-lerncloud-multipass"
-  #source     = "git::https://github.com/mc-b/terraform-lerncloud-maas"
-  #source     = "git::https://github.com/mc-b/terraform-lerncloud-lernmaas"  
-  source     = "git::https://github.com/mc-b/terraform-lerncloud-aws"
-  #source     = "git::https://github.com/mc-b/terraform-lerncloud-azure" 
-  #source     = "git::https://github.com/mc-b/terraform-lerncloud-proxmox"    
+  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
 
   module      = "cascpm-${var.host_no}-${terraform.workspace}"
   description = "CAS Cloud and Platform Manager Mit Cloud-Expertise die Digitalisierung mitgestalten"
@@ -20,7 +14,7 @@ module "master" {
   memory  = 8
   storage = 32
   # SSH, Kubernetes, NFS
-  ports      = [ 22, 80, 16443, 25000 ]
+  ports = [22, 8080, 30080, 16443, 25000]
 
   # MAAS Server Access Info
   url = var.url
@@ -28,5 +22,38 @@ module "master" {
   vpn = var.vpn
 }
 
+module "worker-01" {
+  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
+
+  module      = "cascpm-${var.host_no+1}-${terraform.workspace}"
+  description = "Kubernetes Worker"
+  userdata    = "cloud-init-cascpm-worker.yaml"
+
+  cores   = 4
+  memory  = 8
+  storage = 32
+  ports   = [22, 8080, 30080, 16443, 25000]
+
+  url = var.url
+  key = var.key
+  vpn = var.vpn
+}
+
+module "worker-02" {
+  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
+
+  module      = "cascpm-${var.host_no+2}-${terraform.workspace}"
+  description = "Kubernetes Worker"
+  userdata    = "cloud-init-cascpm-worker.yaml"
+
+  cores   = 4
+  memory  = 8
+  storage = 32
+  ports   = [22, 8080, 30080, 16443, 25000]
+
+  url = var.url
+  key = var.key
+  vpn = var.vpn
+}
 
 
