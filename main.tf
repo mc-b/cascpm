@@ -4,7 +4,7 @@
 
 module "controlplane" {
 
-  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
+  source = "./aws"
 
   module      = "cascpm-${var.host_no}-${terraform.workspace}"
   description = "CAS Cloud and Platform Manager Mit Cloud-Expertise die Digitalisierung mitgestalten"
@@ -23,7 +23,7 @@ module "controlplane" {
 }
 
 module "worker-01" {
-  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
+  source = "./aws"
 
   module      = "cascpm-${var.host_no+1}-${terraform.workspace}"
   description = "Kubernetes Worker"
@@ -40,7 +40,7 @@ module "worker-01" {
 }
 
 module "worker-02" {
-  source = "git::https://github.com/mc-b/terraform-lerncloud-aws"
+  source = "./aws"
 
   module      = "cascpm-${var.host_no+2}-${terraform.workspace}"
   description = "Kubernetes Worker"
