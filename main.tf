@@ -1,7 +1,7 @@
 
 module "vms" {
-  #source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
-  source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
+  source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
 
   machines = {
     "controlplane-01" = {
