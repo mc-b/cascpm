@@ -14,10 +14,6 @@ Initialisiert Terraform
 
     terraform init
     
-Löscht die Datei `.terraform/modules/master/provider.tf` und Übertragt die AWS Credentials Informationen in die Datei `provider.tf` z.B. mittels Notepad
-
-    notepad provider.tf
-    
 Erstellt die Infrastruktur
 
     terraform apply

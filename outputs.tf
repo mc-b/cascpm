@@ -1,39 +1,35 @@
-###
-#   Outputs wie IP-Adresse und DNS Name
-#  
 
-output "ip_vm" {
-  value       = module.controlplane.ip_vm
-  description = "The IP address of the server instance."
+output "ips" {
+  value = module.vms.ip_vm
 }
 
-output "fqdn_vm" {
-  value       = module.controlplane.fqdn_vm
-  description = "The FQDN of the server instance."
+output "fqdn_names" {
+  value = module.vms.fqdn_vm
 }
 
-output "description" {
-  value       = module.controlplane.description
-  description = "Description VM"
+output "fqdn_private" {
+  description = "Interne DNS-Namen der AWS-VMs"
+  value       = module.vms.fqdn_private
 }
 
-# Einfuehrungsseite(n)
-
+# Lokale Hilfsvariablen für Zugriff auf die einzelnen Maschinen aus der map
 locals {
-  worker_01_ip   = module.worker-01.ip_vm
-  worker_01_fqdn = module.worker-01.fqdn_vm
-  worker_02_ip   = module.worker-02.ip_vm
-  worker_02_fqdn = module.worker-02.fqdn_vm
+  controlplane_ip   = module.vms.ip_vm["controlplane-01"]
+  controlplane_fqdn = module.vms.fqdn_vm["controlplane-01"]
+  worker_01_ip      = module.vms.ip_vm["worker-01"]
+  worker_01_fqdn    = module.vms.fqdn_vm["worker-01"]
+  worker_02_ip      = module.vms.ip_vm["worker-02"]
+  worker_02_fqdn    = module.vms.fqdn_vm["worker-02"]
 }
 
+# Generiere README aus INTRO.md Template
 output "README" {
   value = templatefile("INTRO.md", {
-    ip             = module.controlplane.ip_vm,
-    fqdn           = module.controlplane.fqdn_vm,
+    ip             = local.controlplane_ip,
+    fqdn           = local.controlplane_fqdn,
     worker_01_ip   = local.worker_01_ip,
     worker_01_fqdn = local.worker_01_fqdn,
     worker_02_ip   = local.worker_02_ip,
     worker_02_fqdn = local.worker_02_fqdn,
   })
 }
-

@@ -1,59 +1,33 @@
-###
-#   Kubernetes Umgebung
-#
 
-module "controlplane" {
+module "vms" {
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
+  source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
 
-  source = "./aws"
+  machines = {
+    "controlplane-01" = {
+      hostname    = "controlplane-${terraform.workspace}"
+      description = "Kubernetes Control Plane Node"
+      userdata    = templatefile("${path.root}/cloud-init-controlplane.yaml", {})
+    },
+    "worker-01" = {
+      hostname = "worker1-${terraform.workspace}"
+      userdata = templatefile("${path.root}/cloud-init-worker.yaml", {})
+    },
+    "worker-02" = {
+      hostname = "worker2-${terraform.workspace}"
+      userdata = templatefile("${path.root}/cloud-init-worker.yaml", {})
+    }
+  }
 
-  module      = "cascpm-${var.host_no}-${terraform.workspace}"
-  description = "CAS Cloud and Platform Manager Mit Cloud-Expertise die Digitalisierung mitgestalten"
-  userdata    = "cloud-init-cascpm.yaml"
+  description = "Kubernetes Nodes"
+  memory      = 8
+  cores       = 4
+  storage     = 32
 
-  cores   = 4
-  memory  = 8
-  storage = 32
-  # SSH, Kubernetes, NFS
-  ports = [22, 8080, 30080, 31883, 16443, 25000]
-
-  # MAAS Server Access Info
-  url = var.url
-  key = var.key
-  vpn = var.vpn
-}
-
-module "worker-01" {
-  source = "./aws"
-
-  module      = "cascpm-${var.host_no+1}-${terraform.workspace}"
-  description = "Kubernetes Worker"
-  userdata    = "cloud-init-cascpm-worker.yaml"
-
-  cores   = 4
-  memory  = 8
-  storage = 32
-  ports   = [22, 8080, 30080, 16443, 25000]
+  ports = [22, 80, 443, 16443]
 
   url = var.url
   key = var.key
   vpn = var.vpn
 }
-
-module "worker-02" {
-  source = "./aws"
-
-  module      = "cascpm-${var.host_no+2}-${terraform.workspace}"
-  description = "Kubernetes Worker"
-  userdata    = "cloud-init-cascpm-worker.yaml"
-
-  cores   = 4
-  memory  = 8
-  storage = 32
-  ports   = [22, 8080, 30080, 16443, 25000]
-
-  url = var.url
-  key = var.key
-  vpn = var.vpn
-}
-
 
