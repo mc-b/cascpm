@@ -2,7 +2,8 @@
 module "vms" {
   source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
   #source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
-
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-lernmaas.git?ref=v2.0.0"
+  
   machines = {
     "controlplane-01" = {
       hostname    = "controlplane-${terraform.workspace}"
@@ -22,7 +23,7 @@ module "vms" {
   description = "Kubernetes Nodes"
   memory      = 8
   cores       = 4
-  storage     = 32
+  storage     = 40
 
   ports = [22, 80, 443, 16443]
 
