@@ -1,7 +1,8 @@
 
 module "vms" {
   #source = "git::https://github.com/mc-b/terraform-lerncloud-multipass.git?ref=v2.0.0"  
-  source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-azure.git?ref=v2.0.0"    
   #source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
   #source = "git::https://github.com/mc-b/terraform-lerncloud-lernmaas.git?ref=v2.0.0"
   
@@ -31,5 +32,9 @@ module "vms" {
   url = var.url
   key = var.key
   vpn = var.vpn
+  
+  # nur Azure Cloud
+  #subscription_id = "..."
+  #module = "cascpm"
 }
 

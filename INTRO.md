@@ -10,7 +10,34 @@ Services
 * https://${fqdn}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
 * https://${fqdn}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
 
+oder 
+
+* http://${ip}:32188/tree/cascpm/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
+* https://${ip}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
+* https://${ip}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
+
 SSH Access
+----------
 
     ssh -i ~/.ssh/lerncloud ubuntu@${fqdn}
+    
+oder
 
+    ssh -i ~/.ssh/lerncloud ubuntu@${ip}
+    
+Join Worker Nodes
+-----------------
+
+Einträge für `00-microk8s-join.ipynb`
+
+    import os
+    os.environ['ControlPlane']='${fqdn}'
+    os.environ['Worker1']='${worker_01_fqdn}'
+    os.environ['Worker2']='${worker_02_fqdn}'
+    
+oder
+
+    import os
+    os.environ['ControlPlane']='${ip}'
+    os.environ['Worker1']='${worker_01_ip}'
+    os.environ['Worker2']='${worker_02_ip}'
