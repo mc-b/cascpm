@@ -1,14 +1,15 @@
 
 module "vms" {
-  #source = "git::https://github.com/mc-b/terraform-lerncloud-multipass.git?ref=v2.0.0"  
-  #source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-gcp.git?ref=v2.0.0"
+  source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
   #source = "git::https://github.com/mc-b/terraform-lerncloud-azure.git?ref=v2.0.0"    
   #source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
+  #source = "git::https://github.com/mc-b/terraform-lerncloud-multipass.git?ref=v2.0.0"  
   #source = "git::https://github.com/mc-b/terraform-lerncloud-lernmaas.git?ref=v2.0.0"
   
   machines = {
     "controlplane-01" = {
-      hostname    = "controlplane-${terraform.workspace}"
+      hostname    = "control-${terraform.workspace}"
       description = "Kubernetes Control Plane Node"
       userdata    = templatefile("${path.root}/cloud-init-controlplane.yaml", {})
     },
@@ -35,6 +36,9 @@ module "vms" {
   
   # nur Azure Cloud
   #subscription_id = "..."
-  #module = "cascpm"
+  module = "cascpm"
+  
+  # nur Google Cloud
+  project = "digi-terra1"
 }
 
