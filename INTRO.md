@@ -13,14 +13,21 @@ Services
 SSH Access
 ----------
 
+Control-Plane
+
     ssh -i ~/.ssh/lerncloud ubuntu@${fqdn}
+    
+Worker Nodes
+
+    ssh -i ~/.ssh/lerncloud ubuntu@${worker_01_fqdn}
+    ssh -i ~/.ssh/lerncloud ubuntu@${worker_02_fqdn}    
     
 Join Worker Nodes
 -----------------
 
 Einträge für `00-microk8s-join.ipynb`
 
-    import os
-    os.environ['ControlPlane']='${fqdn}'
-    os.environ['Worker1']='${worker_01_fqdn}'
-    os.environ['Worker2']='${worker_02_fqdn}'
+import os
+os.environ['ControlPlane']='${fqdn_private}'
+os.environ['Worker1']='${worker_01_private}'
+os.environ['Worker2']='${worker_02_private}'

@@ -6,7 +6,7 @@ module "vms" {
   #source = "git::https://github.com/mc-b/terraform-lerncloud-maas.git?ref=v2.0.0"
   #source = "git::https://github.com/mc-b/terraform-lerncloud-multipass.git?ref=v2.0.0"  
   #source = "git::https://github.com/mc-b/terraform-lerncloud-lernmaas.git?ref=v2.0.0"
-  
+
   machines = {
     "controlplane-01" = {
       hostname    = "control-${terraform.workspace}"
@@ -30,15 +30,11 @@ module "vms" {
 
   ports = [22, 80, 443, 16443]
 
+  # MAAS: URL MAAS, Azure: Resource Group, Google: Project-Id
   url = var.url
+  # MAAS: API-Key, Azure: Subscription-Id
   key = var.key
+  # MAAS: optionales WireGuard VPN
   vpn = var.vpn
-  
-  # nur Azure Cloud
-  #subscription_id = "..."
-  module = "cascpm"
-  
-  # nur Google Cloud
-  project = "digi-terra1"
 }
 
