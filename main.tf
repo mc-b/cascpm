@@ -11,7 +11,13 @@ module "vms" {
     "controlplane-01" = {
       hostname    = "control-${terraform.workspace}"
       description = "Kubernetes Control Plane Node"
-      userdata    = templatefile("${path.root}/cloud-init-controlplane.yaml", {})
+      userdata    = templatefile("${path.root}/cloud-init-controlplane.yaml", {
+        INSTALL_CERT_MANAGER  = "no"
+        INSTALL_KUBEVIRT      = "no"
+        INSTALL_LONGHORN      = "no"
+        INSTALL_ISTIO         = "no"
+        INSTALL_KNATIVE       = "no"
+      })
     },
     "worker-01" = {
       hostname = "worker1-${terraform.workspace}"
