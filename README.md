@@ -5,6 +5,8 @@ Mit Cloud-Expertise die Digitalisierung mitgestalten.
 Quick-Start
 -----------
 
+Auf Windows Installiert [Git/Bash](https://git-scm.com/downloads). Auf Linux und Mac bracht es nur `git`.
+
 Klont des CAS CPM Repository
 
     git clone https://github.com/mc-b/cascmp 

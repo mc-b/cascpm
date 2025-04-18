@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set +e  # NICHT bei Fehlern abbrechen!
+
+echo "🔧 Worker Nodes joinen"
+JOIN=$(sudo microk8s add-node --token-ttl 3600 | head -2 | tail -1)
+
+echo "➡️ Worker 1 join"
+ssh ${worker1} -- sudo $JOIN || echo "⚠️ Worker 1 join fehlgeschlagen"
+
+echo "➡️ Worker 2 join"
+ssh ${worker2} -- sudo $JOIN || echo "⚠️ Worker 2 join fehlgeschlagen"
+
+echo "🔧 Worker Nodes /data mounten"
+
+echo "➡️ Worker 1 /data mounten"
+ssh ${worker1} "sudo mkdir -p /data; sudo mount -t nfs ${controlplane}:/data /data" || echo "⚠️ Worker 1 /data mounten fehlgeschlagen"
+
+echo "➡️ Worker 2 /data mounten"
+ssh ${worker2} "sudo mkdir -p /data; sudo mount -t nfs ${controlplane}:/data /data" || echo "⚠️ Worker 2 /data mounten fehlgeschlagen"
+
+echo "🔧 Worker Nodes /var/snap/microk8s/common/default-storage mounten"
+
+echo "➡️ Worker 1 /default-storage mounten"
+ssh ${worker1} "sudo mount -t nfs ${controlplane}:/var/snap/microk8s/common/default-storage /var/snap/microk8s/common/default-storage" || echo "⚠️ Worker 1 /default-storage mounten fehlgeschlagen"
+
+echo "➡️ Worker 2 /default-storage mounten"
+ssh ${worker2} "sudo mount -t nfs ${controlplane}:/var/snap/microk8s/common/default-storage /var/snap/microk8s/common/default-storage" || echo "⚠️ Worker 2 /default-storage mounten fehlgeschlagen"
+
+echo "✅ Alle Schritte ausgeführt (Fehler ignoriert, Status oben prüfen)"
+
+

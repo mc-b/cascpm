@@ -1,4 +1,5 @@
 
+# K8s Cluster
 module "vms" {
   #source = "git::https://github.com/mc-b/terraform-lerncloud-gcp.git?ref=v2.0.0"
   source = "git::https://github.com/mc-b/terraform-lerncloud-aws.git?ref=v2.0.0"
@@ -11,12 +12,12 @@ module "vms" {
     "controlplane-01" = {
       hostname    = "control-${terraform.workspace}"
       description = "Kubernetes Control Plane Node"
-      userdata    = templatefile("${path.root}/cloud-init-controlplane.yaml", {
-        INSTALL_CERT_MANAGER  = "no"
-        INSTALL_KUBEVIRT      = "no"
-        INSTALL_LONGHORN      = "no"
-        INSTALL_ISTIO         = "no"
-        INSTALL_KNATIVE       = "no"
+      userdata = templatefile("${path.root}/cloud-init-controlplane.yaml", {
+        INSTALL_CERT_MANAGER = "no"
+        INSTALL_KUBEVIRT     = "no"
+        INSTALL_LONGHORN     = "no"
+        INSTALL_ISTIO        = "no"
+        INSTALL_KNATIVE      = "no"
       })
     },
     "worker-01" = {
@@ -43,4 +44,20 @@ module "vms" {
   # MAAS: optionales WireGuard VPN
   vpn = var.vpn
 }
+
+# Join Cluster
+resource "null_resource" "join_cluster" {
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command     = <<EOT
+      echo "[+] Warte auf SSH-Verfügbarkeit auf der Controlplane..."
+      for i in {1..10}; do
+        ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud ubuntu@${local.controlplane_ip} "echo 'SSH OK'" && break || echo "SSH noch nicht verfügbar, versuche erneut..." && sleep 5
+      done
+      echo "[+] SSH Verbindung steht, kopiere join.sh..."
+      scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud join.sh ubuntu@${local.controlplane_ip}:join.sh
+    EOT
+  }
+}
+
 

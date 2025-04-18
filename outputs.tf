@@ -29,3 +29,15 @@ output "README" {
 
   })
 }
+
+# Join Cluster Script
+resource "local_file" "join_script" {
+  content = templatefile("${path.module}/join.sh.tmpl", {
+    controlplane = local.controlplane_private
+    worker1      = local.worker_01_private
+    worker2      = local.worker_02_private
+  })
+
+  filename        = "${path.module}/join.sh"
+  file_permission = "0755"
+}
