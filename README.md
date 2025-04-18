@@ -7,6 +7,8 @@ Quick-Start
 
 Auf Windows Installiert [Git/Bash](https://git-scm.com/downloads). Auf Linux und Mac bracht es nur `git`.
 
+**ACHTUNG** es muss zwingend [OpenTofu](https://opentofu.org/) verwendet werden.
+
 Klont des CAS CPM Repository
 
     git clone https://github.com/mc-b/cascmp 
@@ -14,20 +16,21 @@ Klont des CAS CPM Repository
     
 Initialisiert Terraform
 
-    terraform init
+    tofu workspace new [aws|azure|gcp|maas|lernmaas|multipass]
+    tofu init
     
 Erstellt die Infrastruktur
 
-    terraform apply
+    tofu apply
     
 Der DNS-Name und benötigte Links werden am Ende des Erstellungsprozesses ausgegeben.
+
+**Der OpenTofu Workspace bestimmt die zu verwendente Cloud!** bzw. welcher source Eintrag verwendet wird.
 
 Clouds
 ------
 
-Je nach Cloud sind die `source` Einträge zu aktivieren und die anderen zu deaktivieren. Das geschieht durch Löschen oder Voranstellen eines `#`.
-
-Das Anmeldeprozedere ist pro Cloud unterschiedlich. Vor dem Ausführen der Terraform Befehle sind folgende Aktionen durchzuführen.
+Das Anmeldeprozedere ist pro Cloud unterschiedlich. Vor dem Ausführen der OpenTofu Befehle sind folgende Aktionen durchzuführen.
 
 ### AWS
 
