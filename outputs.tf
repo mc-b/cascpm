@@ -1,20 +1,20 @@
 
 # Lokale Hilfsvariablen für Zugriff auf die einzelnen Maschinen aus der map
 locals {
-  controlplane_ip      = module.vms.ip_vm["controlplane-01"]
-  controlplane_fqdn    = module.vms.fqdn_vm["controlplane-01"]
-  controlplane_private = module.vms.fqdn_private["controlplane-01"]
-  worker_01_ip         = module.vms.ip_vm["worker-01"]
-  worker_01_fqdn       = module.vms.fqdn_vm["worker-01"]
-  worker_01_private    = module.vms.fqdn_private["worker-01"]
-  worker_02_ip         = module.vms.ip_vm["worker-02"]
-  worker_02_fqdn       = module.vms.fqdn_vm["worker-02"]
-  worker_02_private    = module.vms.fqdn_private["worker-02"]
+  controlplane_ip      = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["controlplane-01"], null) : null
+  controlplane_fqdn    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["controlplane-01"], null) : null
+  controlplane_private = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_private["controlplane-01"], null) : null
+  worker_01_ip         = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["worker-01"], null) : null
+  worker_01_fqdn       = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["worker-01"], null) : null
+  worker_01_private    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_private["worker-01"], null) : null
+  worker_02_ip         = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["worker-02"], null) : null
+  worker_02_fqdn       = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["worker-02"], null) : null
+  worker_02_private    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_private["worker-02"], null) : null
 }
 
 # Generiere README aus INTRO.md Template
 output "README" {
-  value = templatefile("INTRO.md", {
+  value = terraform.workspace != "lernmaas" ? templatefile("INTRO.md", {
     ip           = local.controlplane_ip,
     fqdn         = local.controlplane_fqdn,
     fqdn_private = local.controlplane_private,
@@ -26,18 +26,6 @@ output "README" {
     worker_02_ip      = local.worker_02_ip,
     worker_02_fqdn    = local.worker_02_fqdn,
     worker_02_private = local.worker_02_private,
-
-  })
+  }) : null
 }
 
-# Join Cluster Script
-resource "local_file" "join_script" {
-  content = templatefile("${path.module}/join.sh.tmpl", {
-    controlplane = local.controlplane_private
-    worker1      = local.worker_01_private
-    worker2      = local.worker_02_private
-  })
-
-  filename        = "${path.module}/join.sh"
-  file_permission = "0755"
-}

@@ -76,13 +76,13 @@ Es sind alle drei `TF_VAR` Variablen zu setzen:
  
 ### lernmaas
 
-Gleiche Anforderungen wie MAAS.io. 
+Gleiche Voraussetzungen wie MAAS.io. 
 
-Im Gegensatz zu MAAS.io, wo nur auf dem KVM-Host mit den meisten Ressourcen VMs erstellt werden, wird auf jedem KVM-Host VMs erstellt.
+Aber es werden auf jedem KVM-Host die VMs erstellt.
 
-Die Datei `outputs.tf` bringt Fehler und muss gelöscht werden.
+Der Join des Kubernetes Clusters muss manuell erfolgen.
 
-### MultiPath
+### Multipass
 
 Es wird ein System mit mindestens 32 GB RAM benötigt. Alle überflüssigen Windows Programme sind zu schliessen.
 
