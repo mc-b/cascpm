@@ -28,19 +28,21 @@ resource "null_resource" "join_cluster" {
 
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
-
     command = <<EOT
-      echo "[+] Warte auf SSH-Verfügbarkeit auf der Controlplane..."
+      echo "[+] Warte auf SSH-Verfügbarkeit auf der Controlplane ${local.target_host} ..."
       sleep 60
-      for i in {1..120}; do
-        ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud ubuntu@${local.target_host} "echo 'SSH OK'" && break || echo "SSH noch nicht verfügbar, versuche erneut..." && sleep 10
+      for i in {1..240}; do
+        ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud \
+            ubuntu@${local.target_host} true >/dev/null 2>&1 && break
+        sleep 5
       done
-      echo "[+] SSH Verbindung steht, kopiere join.sh..."
-      scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud join.sh ubuntu@${local.target_host}:join.sh
+      echo "[+] SSH Verbindung steht, kopiere join.sh to ${local.target_host}"
+      scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+          -i ~/.ssh/lerncloud join.sh ubuntu@${local.target_host}:join.sh
 EOT
   }
 }
-
 #########################
 # nur workspace lernmaas
 
