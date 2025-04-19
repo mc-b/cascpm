@@ -70,7 +70,7 @@ write_files:
       echo "[INFO] Installiere Kubernetes Tools..."
       curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/k8stools.sh | bash -
 
-      echo "[INFO] Alle Installationen abgeschlossen."
+      echo "✅ [INFO] Alle Installationen abgeschlossen."
 
 runcmd:
   - [ bash, -c, "/usr/local/bin/install-services.sh" ]
