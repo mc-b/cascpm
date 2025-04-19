@@ -50,3 +50,11 @@ locals {
   ] : [try(module.vms.fqdn_vm["worker-02"], null)]
 }
 
+output "README_lernmaas" {
+  value = terraform.workspace != "lernmaas" ? null : templatefile("INTRO_lernmaas.md", {
+    controlplanes = local.controlplane_list,
+    worker1s      = local.worker_01_list,
+    worker2s      = local.worker_02_list
+  })
+}
+
