@@ -27,6 +27,28 @@ Der DNS-Name und benötigte Links werden am Ende des Erstellungsprozesses ausgeg
 
 **Der OpenTofu Workspace bestimmt die zu verwendente Cloud!** bzw. welcher source Eintrag verwendet wird.
 
+Module - SW Pakete
+------------------
+
+Mittels einer Datei `terraform.tfvars` kann festgelegt werden, welche SW Pakete installiert werden.
+
+Beispiel: `terraform.tfvars` 
+
+    install_cert_manager = "yes"
+    install_kubevirt     = "no"
+    install_longhorn     = "no"
+    install_istio        = "yes"
+    install_knative      = "yes"
+
+Oder bei Aufruf von `apply`
+
+    tofu apply \
+      -var="install_cert_manager=yes" \
+      -var="install_kubevirt=no" \
+      -var="install_longhorn=yes" \
+      -var="install_istio=no" \
+      -var="install_knative=no"
+
 Clouds
 ------
 

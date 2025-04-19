@@ -8,11 +8,11 @@ module "vms" {
       hostname    = "control"
       description = "Kubernetes Control Plane Node"
       userdata = templatefile("${path.root}/cloud-init-controlplane.yaml", {
-        INSTALL_CERT_MANAGER = "no"
-        INSTALL_KUBEVIRT     = "no"
-        INSTALL_LONGHORN     = "no"
-        INSTALL_ISTIO        = "no"
-        INSTALL_KNATIVE      = "no"
+        INSTALL_CERT_MANAGER = var.install_cert_manager
+        INSTALL_KUBEVIRT     = var.install_kubevirt
+        INSTALL_LONGHORN     = var.install_longhorn
+        INSTALL_ISTIO        = var.install_istio
+        INSTALL_KNATIVE      = var.install_knative
       })
     },
     "worker-01" = {

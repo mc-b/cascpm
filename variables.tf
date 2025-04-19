@@ -1,4 +1,33 @@
 
+# Optionale Module bzw. SW Pakete
+
+variable "install_cert_manager" {
+  type    = string
+  default = "no"
+}
+
+variable "install_kubevirt" {
+  type    = string
+  default = "no"
+}
+
+variable "install_longhorn" {
+  type    = string
+  default = "no"
+}
+
+variable "install_istio" {
+  type    = string
+  default = "no"
+}
+
+variable "install_knative" {
+  type    = string
+  default = "no"
+}
+
+# Zugriffsinformationen
+
 variable "url" {
   description = "Evtl. URL fuer den Zugriff auf das API des Racks Servers"
   type        = string
