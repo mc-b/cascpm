@@ -30,6 +30,5 @@ hs_err_pid*
 /terraform.tfstate.d/
 /TODO.md
 /join.sh
-/terraform.tfvars
-/join-?.sh
-/main.tfvars
+/join-*.sh
+/main.auto.tfvars
