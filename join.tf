@@ -67,8 +67,8 @@ resource "null_resource" "join_cluster_lernmaas" {
 
     command = <<EOT
       echo "[+] Warte auf SSH-Verfügbarkeit auf ${local.controlplane_list[count.index]}..."
-      for i in {1..120}; do
-        ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud ubuntu@${local.controlplane_list[count.index]} "echo 'SSH OK'" && break || echo "SSH noch nicht verfügbar, versuche erneut..." && sleep 10
+      for i in {1..400}; do
+        ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud ubuntu@${local.controlplane_list[count.index]} "echo 'SSH OK'" && break || echo "SSH noch nicht verfügbar, versuche erneut..." && sleep 5
       done
       echo "[+] SSH Verbindung steht, kopiere join-${count.index + 1}.sh..."
       scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/lerncloud ${path.module}/join-${count.index + 1}.sh ubuntu@${local.controlplane_list[count.index]}:join.sh
