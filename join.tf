@@ -1,8 +1,13 @@
 
 # Join Cluster
 
+locals {
+  is_lernmaas = terraform.workspace == "lernmaas"
+  target_host = local.is_lernmaas ? "localhost" : try(module.vms.fqdn_vm["controlplane-01"], "localhost")
+}
+
 resource "local_file" "join_script" {
-  count = terraform.workspace != "lernmaas" ? 1 : 0
+  count = local.is_lernmaas ? 0 : 1
 
   content = terraform.workspace != "lernmaas" ? templatefile("${path.module}/join.sh.tmpl", {
     controlplane = local.controlplane_private
@@ -12,11 +17,6 @@ resource "local_file" "join_script" {
 
   filename        = "${path.module}/join.sh"
   file_permission = "0755"
-}
-
-locals {
-  is_lernmaas = terraform.workspace == "lernmaas"
-  target_host = local.is_lernmaas ? "localhost" : try(module.vms.fqdn_vm["controlplane-01"], "localhost")
 }
 
 resource "null_resource" "join_cluster" {
@@ -58,7 +58,7 @@ resource "local_file" "join_script_lernmaas" {
 }
 
 resource "null_resource" "join_cluster_lernmaas" {
-  count = local.is_lernmaas ? length(local.controlplane_list) : 1
+  count = local.is_lernmaas ? length(local.controlplane_list) : 0
 
   depends_on = [local_file.join_script_lernmaas]
 
