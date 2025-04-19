@@ -32,7 +32,8 @@ write_files:
       sudo su - ubuntu -c "curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/jupyter-notebook.sh | bash -"
       sudo su - ubuntu -c "git clone https://github.com/mc-b/cascpm.git --branch v2.0.0"
       
-      sudo su - ubuntu -c "[ -f ~/join.sh ] && echo '✅ join.sh gefunden, starte...' && bash ~/join.sh || echo '⚠️ join.sh nicht gefunden, überspringe...'"
+      # Join Cluster
+      sudo su - ubuntu -c "[ -f ~/join.sh ] && { bash ~/join.sh && rm -f ~/join.sh; }"
 
       # Optional: cert-manager
       if [ "${INSTALL_CERT_MANAGER}" = "yes" ]; then
@@ -69,6 +70,9 @@ write_files:
 
       echo "[INFO] Installiere Kubernetes Tools..."
       curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/k8stools.sh | bash -
+
+      # Join Cluster: wenn timing Probleme - nochmals versuchen      
+      sudo su - ubuntu -c "[ -f ~/join.sh ] && { bash ~/join.sh && rm -f ~/join.sh; }"
 
       echo "✅ [INFO] Alle Installationen abgeschlossen."
 
