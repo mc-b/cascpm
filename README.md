@@ -32,7 +32,7 @@ Module - SW Pakete
 
 Mittels einer Datei `terraform.tfvars` kann festgelegt werden, welche SW Pakete installiert werden.
 
-Beispiel: `terraform.tfvars` 
+Beispiel: `main.tfvars` 
 
     install_cert_manager = "yes"
     install_kubevirt     = "no"

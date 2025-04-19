@@ -28,7 +28,7 @@ resource "null_resource" "join_cluster" {
 
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
-    command = <<EOT
+    command     = <<EOT
       echo "[+] Warte auf SSH-Verfügbarkeit auf der Controlplane ${local.target_host} ..."
       sleep 60
       for i in {1..240}; do
