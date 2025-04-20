@@ -23,3 +23,5 @@ runcmd:
   - sudo su - ubuntu -c "curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/cert-manager.sh | bash -"   
   - sudo su - ubuntu -c "curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/jupyter-notebook.sh | bash -" 
   - sudo su - ubuntu -c "git clone https://github.com/mc-b/cascpm.git --branch v2.0.0"
+  - curl -sfL https://raw.githubusercontent.com/mc-b/lerncloud/main/services/k8stools.sh | bash -     
+  
