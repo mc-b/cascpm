@@ -3,10 +3,8 @@ CAS Cloud and Platform Manager
 
 Umgebung zum Kurs: [CAS Cloud and Platform Manager](https://www.hslu.ch/de-ch/informatik/weiterbildung/technologies-and-methods/cas-cloud/).
    
-Join Worker Nodes
+Join Worker Nodes (00-microk8s-join.ipynb)
 -----------------
-
-Einträge für `00-microk8s-join.ipynb`
 
 import os
 os.environ['ControlPlane']='${fqdn_private}'
@@ -16,20 +14,34 @@ os.environ['Worker2']='${worker_02_private}'
 SSH Access
 ----------
 
-Control-Plane
-
-    ssh -i ~/.ssh/lerncloud ubuntu@${fqdn}
+Development: 
+    ssh -i ~/.ssh/lerncloud ubuntu@${development_fqdn}
     
-Worker Nodes
+Build (CI/CD): 
+    ssh -i ~/.ssh/lerncloud ubuntu@${build_fqdn}
 
+Production (Control-Plane, Worker-Nodes)
+    ssh -i ~/.ssh/lerncloud ubuntu@${fqdn}
     ssh -i ~/.ssh/lerncloud ubuntu@${worker_01_fqdn}
     ssh -i ~/.ssh/lerncloud ubuntu@${worker_02_fqdn}   
     
 Services
 --------
 
+Development
+* http://${development_fqdn}:32188/tree/cascpm/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
+* https://${development_fqdn}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
+* https://${development_fqdn}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
+* http://${development_fqdn}:7500                           - FRP (Fast Reverse Proxy). User: admin, Password insecure
+
+Build (CI/CD)
+* http://${build_fqdn}:32188/tree/cascpm/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
+* https://${build_fqdn}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
+* https://${build_fqdn}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
+* http://${build_fqdn}:7500                           - FRP (Fast Reverse Proxy). User: admin, Password insecure
+
+Production
 * http://${fqdn}:32188/tree/cascpm/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
 * https://${fqdn}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
 * https://${fqdn}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
- 
 
