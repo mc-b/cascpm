@@ -2,11 +2,11 @@
 # Lokale Hilfsvariablen für Zugriff auf die einzelnen Maschinen aus der map
 locals {
 
-  development_ip      = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["dev"], null) : null
-  development_fqdn    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["dev"], null) : null
-  
-  build_ip      = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["build"], null) : null
-  build_fqdn    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["build"], null) : null
+  development_ip   = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["dev"], null) : null
+  development_fqdn = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["dev"], null) : null
+
+  build_ip   = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["build"], null) : null
+  build_fqdn = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["build"], null) : null
 
   controlplane_ip      = terraform.workspace != "lernmaas" ? try(module.vms.ip_vm["controlplane-01"], null) : null
   controlplane_fqdn    = terraform.workspace != "lernmaas" ? try(module.vms.fqdn_vm["controlplane-01"], null) : null
@@ -22,13 +22,13 @@ locals {
 # Generiere README aus INTRO.md Template
 output "README" {
   value = terraform.workspace != "lernmaas" ? templatefile("INTRO.md", {
-  
-    development_ip     = local.development_ip,
-    development_fqdn  = local.development_fqdn,
-    
-    build_ip     = local.build_ip,
-    build_fqdn  = local.build_fqdn,    
-  
+
+    development_ip   = local.development_ip,
+    development_fqdn = local.development_fqdn,
+
+    build_ip   = local.build_ip,
+    build_fqdn = local.build_fqdn,
+
     ip           = local.controlplane_ip,
     fqdn         = local.controlplane_fqdn,
     fqdn_private = local.controlplane_private,

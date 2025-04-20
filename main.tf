@@ -8,12 +8,12 @@ module "vms" {
     "dev" = {
       hostname = "dev"
       userdata = templatefile("${path.root}/cloud-init-development.yaml", {})
-    }
+    },
     # Build CI/CD
     "build" = {
       hostname = "build"
       userdata = templatefile("${path.root}/cloud-init-build.yaml", {})
-    }      
+    },
     # Production
     "controlplane-01" = {
       hostname    = "control"
