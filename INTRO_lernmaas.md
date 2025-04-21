@@ -36,8 +36,8 @@ Services
 %{ for idx in range(length(controlplanes)) ~}
 Gruppe ${idx + 1} Services:
 
-* http://${controlplanes[idx]}:32188/tree/cascpm/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
-* https://${controlplanes[idx]}:30443                         - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
-* https://${controlplanes[idx]}:4200                          - Terminal im Browser. User: ubuntu, Password insecure
+* http://${controlplanes[idx]}:32188/tree/cascpm/03-prod/README.ipynb - Beispiele Infrastruktur (Jupyter Notebooks)
+* https://${controlplanes[idx]}:30443                                 - Kubernetes Dashboard (kein Token notwendig, Überspringen drücken)
+* https://${controlplanes[idx]}:4200                                  - Terminal im Browser. User: ubuntu, Password insecure
 
 %{ endfor ~}
