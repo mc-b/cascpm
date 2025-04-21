@@ -1,9 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: my-service
-  description: Mein cooler Service in Backstage
+  name: demo-service
+  description: Ein cooler Demo-Service in Backstage
+  annotations:
+    backstage.io/managed-by-location: url:https://raw.githubusercontent.com/mc-b/cascpm/v2.0.0/01-dev/backstage/catalog-info.yaml
+    backstage.io/managed-by-origin-location: url:https://raw.githubusercontent.com/mc-b/cascpm/v2.0.0/01-dev/backstage/catalog-info.yaml
 spec:
   type: service
   lifecycle: production
-  owner: team-a
+  owner: demo-team
