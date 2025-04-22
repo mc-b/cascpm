@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: garage
+  description: Garage Team der Auto Shop GmbH
+spec:
+  type: team
+  parent: app
+  children: []
+  members:
+    - jan.keller
+    - sabine.bauer
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: jan.keller
+spec:
+  profile:
+    displayName: Jan Keller
+    email: jan.keller@autoshopgmbh.de
+  memberOf: [garage]
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: sabine.bauer
+spec:
+  profile:
+    displayName: Sabine Bauer
+    email: sabine.bauer@autoshopgmbh.de
+  memberOf: [garage]

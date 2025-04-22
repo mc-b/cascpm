@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: management
+  description: Management Team der Auto Shop GmbH
+spec:
+  type: team
+  parent: app
+  children: []
+  members:
+    - martin.wagner
+    - claudia.becker
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: martin.wagner
+spec:
+  profile:
+    displayName: Martin Wagner
+    email: martin.wagner@autoshopgmbh.de
+  memberOf: [management]
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: claudia.becker
+spec:
+  profile:
+    displayName: Claudia Becker
+    email: claudia.becker@autoshopgmbh.de
+  memberOf: [management]

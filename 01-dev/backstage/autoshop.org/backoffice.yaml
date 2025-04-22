@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: backoffice
+  description: Backoffice Team der Auto Shop GmbH
+spec:
+  type: team
+  parent: app
+  children: []
+  members:
+    - lisa.mueller
+    - thomas.schmidt
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: lisa.mueller
+spec:
+  profile:
+    displayName: Lisa Müller
+    email: lisa.mueller@autoshopgmbh.de
+  memberOf: [backoffice]
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: thomas.schmidt
+spec:
+  profile:
+    displayName: Thomas Schmidt
+    email: thomas.schmidt@autoshopgmbh.de
+  memberOf: [backoffice]

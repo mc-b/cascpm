@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: auto-shop-gmbh-groups
+  description: Enthält alle Gruppen und Benutzer der Auto Shop GmbH
+spec:
+  type: url
+  targets:
+    - ./backoffice.yaml
+    - ./garage.yaml
+    - ./iot.yaml
+    - ./maintenance.yaml
+    - ./management.yaml
+    - ./shop.yaml
