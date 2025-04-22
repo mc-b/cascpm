@@ -3,7 +3,7 @@ kind: Component
 metadata:
   name: cascpm
   annotations:
-    backstage.io/techdocs-ref: dir:.    
+    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: mc-b/cascpm
 spec:
   type: service
