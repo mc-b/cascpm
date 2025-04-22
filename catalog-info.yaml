@@ -8,16 +8,3 @@ spec:
   type: service
   lifecycle: production
   owner: education
----
-kind: User
-metadata:
-  name: mc-b
-spec:
-  memberOf: [education]
----
-kind: Group
-metadata:
-  name: education
-spec:
-  type: team
-  children: []
