@@ -9,16 +9,12 @@ spec:
   lifecycle: production
   owner: education
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
-apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
   name: mc-b
 spec:
   memberOf: [education]
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: education
