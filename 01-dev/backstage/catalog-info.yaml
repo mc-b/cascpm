@@ -4,8 +4,7 @@ metadata:
   name: demo-service
   description: Ein cooler Demo-Service in Backstage
   annotations:
-    backstage.io/managed-by-location: url:https://raw.githubusercontent.com/mc-b/cascpm/v2.0.0/01-dev/backstage/catalog-info.yaml
-    backstage.io/managed-by-origin-location: url:https://raw.githubusercontent.com/mc-b/cascpm/v2.0.0/01-dev/backstage/catalog-info.yaml
+    backstage.io/techdocs-ref: url:https://github.com/mc-b/cascpm/blob/v2.0.0/README.md
 spec:
   type: service
   lifecycle: production
