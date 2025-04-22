@@ -9,12 +9,14 @@ spec:
   lifecycle: production
   owner: education
 ---
+apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
   name: mc-b
 spec:
   memberOf: [education]
 ---
+apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: education
