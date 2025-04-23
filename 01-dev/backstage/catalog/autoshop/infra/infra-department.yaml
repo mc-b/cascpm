@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: infra
+  description: Infrastruktur
+spec:
+  type: department
+  profile:
+    displayName: Abteilung Infrastruktur  
+  parent: autoshop-gmbh
+  children: [team-iiot,iot]

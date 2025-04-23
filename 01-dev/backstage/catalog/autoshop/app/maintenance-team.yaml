@@ -19,7 +19,7 @@ metadata:
 spec:
   profile:
     displayName: Paul Fischer
-    email: paul.fischer@autoshopgmbh.de
+    email: paul.fischer@autoshopgmbh.ch
   memberOf: [maintenance]
 
 ---
@@ -30,5 +30,5 @@ metadata:
 spec:
   profile:
     displayName: Emily Schneider
-    email: emily.schneider@autoshopgmbh.de
+    email: emily.schneider@autoshopgmbh.ch
   memberOf: [maintenance]

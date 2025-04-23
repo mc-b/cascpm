@@ -19,7 +19,7 @@ metadata:
 spec:
   profile:
     displayName: Alex Meier
-    email: alex.meier@autoshopgmbh.de
+    email: alex.meier@autoshopgmbh.ch
   memberOf: [iot]
 
 ---
@@ -30,5 +30,5 @@ metadata:
 spec:
   profile:
     displayName: Nina Hoffmann
-    email: nina.hoffmann@autoshopgmbh.de
+    email: nina.hoffmann@autoshopgmbh.ch
   memberOf: [iot]

@@ -19,7 +19,7 @@ metadata:
 spec:
   profile:
     displayName: Jan Keller
-    email: jan.keller@autoshopgmbh.de
+    email: jan.keller@autoshopgmbh.ch
   memberOf: [garage]
 
 ---
@@ -30,5 +30,5 @@ metadata:
 spec:
   profile:
     displayName: Sabine Bauer
-    email: sabine.bauer@autoshopgmbh.de
+    email: sabine.bauer@autoshopgmbh.ch
   memberOf: [garage]

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: education
+  description: Ausbildung 
+spec:
+  type: department
+  profile:
+    displayName: Abteilung Ausbildung  
+  parent: autoshop-gmbh
+  children: []

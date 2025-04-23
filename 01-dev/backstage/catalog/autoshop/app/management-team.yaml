@@ -1,8 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: management
+  name: management-team
   description: Management Team der Auto Shop GmbH
+  links:
+    - url: https://gitlab.com/ch-mc-b/autoshop-ms/app/management
+      title: Sourcecode
+      icon: git  
+    - url: https://gitlab.com/ch-mc-b/autoshop-ms/app/management/container_registry
+      title: Container Registry
+      icon: registry     
 spec:
   type: team
   parent: app
@@ -19,8 +26,8 @@ metadata:
 spec:
   profile:
     displayName: Martin Wagner
-    email: martin.wagner@autoshopgmbh.de
-  memberOf: [management]
+    email: martin.wagner@autoshopgmbh.ch
+  memberOf: [management-team]
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -30,5 +37,5 @@ metadata:
 spec:
   profile:
     displayName: Claudia Becker
-    email: claudia.becker@autoshopgmbh.de
-  memberOf: [management]
+    email: claudia.becker@autoshopgmbh.ch
+  memberOf: [management-team]

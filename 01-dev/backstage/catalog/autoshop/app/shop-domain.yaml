@@ -1,0 +1,105 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: shop-system
+  title: Shop System
+  description: Contains services related to the customer-facing online shop, including catalog, customer accounts, orders, and the webshop.
+spec:
+  owner: shop-team
+
+---
+# catalog
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shop-catalog
+  description: Catalog service for managing product listings.
+spec:
+  type: service
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: shop-catalog-api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+  definition: ./openapi/catalog.yaml
+  providesApis:
+    - shop-catalog-api
+
+# customer
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shop-customer
+  description: Service for managing customer accounts.
+spec:
+  type: service
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: shop-customer-api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+  definition: ./openapi/customer.yaml
+  providesApis:
+    - shop-customer-api
+
+# order
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shop-order
+  description: Order management service.
+spec:
+  type: service
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+  dependsOn:
+    - component:default/shop-catalog  
+    - component:default/shop-customer  
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: shop-order-api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
+  definition: ./openapi/order.yaml
+  providesApis:
+    - shop-order-api
+
+# webshop
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shop-webshop
+  description: Frontend and backend for customer shopping experience.
+spec:
+  type: website
+  lifecycle: production
+  owner: shop-team
+  system: shop-system
