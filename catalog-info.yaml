@@ -2,10 +2,18 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: cascpm
+  namespace: mc-b
+  description: CAS CPM
+  tags: []
+  links:
+  - url: https://github.com/mc-b/cascpm
+    title: Repository
+    icon: github
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: mc-b/cascpm
+    backstage.io/source-location: url:https://github.com/mc-b/cascpm
+    backstage.io/techdocs-ref: url:https://github.com/mc-b/cascpm
 spec:
-  type: service
+  type: other
   lifecycle: production
-  owner: education
+  owner: group:mc-b/mc-b
