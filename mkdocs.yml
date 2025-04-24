@@ -1,4 +1,8 @@
 site_name: cascpm
+plugins:
+  - techdocs-core
+  
 docs_dir: .
+
 nav:
 - README: README.md
