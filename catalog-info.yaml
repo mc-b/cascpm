@@ -4,7 +4,11 @@ metadata:
   name: cascpm
   namespace: mc-b
   description: CAS CPM
-  tags: []
+  tags:
+    - container
+    - kubernetes
+    - education
+    - hslu
   links:
   - url: https://github.com/mc-b/cascpm
     title: Repository
@@ -14,6 +18,6 @@ metadata:
     backstage.io/source-location: url:https://github.com/mc-b/cascpm
     # backstage.io/techdocs-ref: url:https://github.com/mc-b/cascpm
 spec:
-  type: other
+  type: website
   lifecycle: production
   owner: group:mc-b/mc-b
