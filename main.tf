@@ -39,7 +39,7 @@ module "vms" {
   description = "Kubernetes Nodes"
   memory      = 6
   cores       = 4
-  storage     = 40
+  storage     = 48
 
   ports = [22, 80, 443, 16443]
 
