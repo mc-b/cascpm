@@ -10,6 +10,8 @@ Klont des CAS CPM Repository
     git clone https://github.com/mc-b/cascmp 
     cd cascmp
     
+Startet in der AWS Academy das Lab und überträgt die AWS Credentials in die Datei `~/.aws/credentials`. Alternative `aws configure`.
+    
 Initialisiert Terraform
 
     terraform init
