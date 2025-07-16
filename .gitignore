@@ -28,3 +28,4 @@ hs_err_pid*
 /terraform.tfstate.backup
 /config.txt
 /cascpm.code-workspace
+/TODO.md
